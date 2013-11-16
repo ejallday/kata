@@ -2,7 +2,13 @@ class StringCalculator
   def add(value)
     nums = value.split(delimiter(value))
     validate(nums)
-    nums.inject(0) { |sum, n| sum + n.to_i }
+    nums.inject(0) do |memo, num|
+      if num.to_i <= 1000
+        memo + num.to_i
+      else
+        memo
+      end
+    end
   end
 
   private
