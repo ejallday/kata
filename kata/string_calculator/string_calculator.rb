@@ -1,7 +1,7 @@
 class StringCalculator
   def add(value)
+    validate(value)
     nums = value.split(delimiter(value))
-    validate(nums)
     nums.inject(0) do |memo, num|
       if num.to_i <= 1000
         memo + num.to_i
@@ -13,9 +13,11 @@ class StringCalculator
 
   private
 
-  def validate(nums)
-    if nums.any? { |n| n.to_i < 0 }
+  def validate(value)
+    if value.match(/\-\d/)
       raise ArgumentError, 'Stop being so negative'
+    elsif value.match(/[,\n]{2,}/)
+      raise ArgumentError, 'Multiple default delimiters not allowed together'
     end
   end
 

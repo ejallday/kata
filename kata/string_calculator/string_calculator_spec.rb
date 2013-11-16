@@ -2,7 +2,7 @@ require_relative 'string_calculator'
 require 'rspec'
 
 describe StringCalculator do 
-  let(:calc) { StringCalculator.new }
+  let(:calc) { StringCalculator }
 
   it 'returns 0 (Fixnum) when passed an empty string' do
     calc.add('').should eq(0)
@@ -32,7 +32,7 @@ describe StringCalculator do
     calc.add("1\n2,3").should eq(6)
   end
 
-  xit 'throws an error if passed multiple delimiters together' do
+  it 'throws an error if passed multiple delimiters together' do
     expect { calc.add("1,\n2") }.to raise_error
   end
 
@@ -41,8 +41,8 @@ describe StringCalculator do
       calc.add("//;\n1;2").should eq(3)
     end
 
-    it 'supports commas' do
-      calc.add("//,\n66,3").should eq(69)
+    it 'can be any character' do
+      calc.add("//?\n66?3").should eq(69)
     end
   end
 
