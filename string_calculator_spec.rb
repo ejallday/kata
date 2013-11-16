@@ -23,4 +23,12 @@ describe StringCalculator do
   it 'returns 45 (Fixnum) when passed the string "41,4"' do
     calc.add('41,4').should eq(45)
   end
+
+  it 'returns 4 (Fixnum) when passed the string "2\n2"' do
+    calc.add("2\n2").should eq(4)
+  end
+
+  it 'returns 6 (Fixnum) when passed the string "1\n2,3"' do
+    calc.add("1\n2,3").should eq(6)
+  end
 end
