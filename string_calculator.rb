@@ -1,10 +1,6 @@
 class StringCalculator
-  attr_reader :value
-  def initialize(value)
-    @value = value
-  end
-
-  def add
-    value.to_i
+  def add(value)
+    nums = value.split(',')
+    nums.inject(0) { |sum, n| sum + n.to_i }
   end
 end
