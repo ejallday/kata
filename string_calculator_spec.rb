@@ -45,4 +45,8 @@ describe StringCalculator do
       calc.add("//,\n66,3").should eq(69)
     end
   end
+
+  it 'does not allow negative numbers' do
+    expect { calc.add('3,-1') }.to raise_error(ArgumentError)
+  end
 end
