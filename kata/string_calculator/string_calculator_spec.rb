@@ -47,9 +47,12 @@ describe StringCalculator do
   end
 
   it 'does not allow negative numbers' do
-    expect { calc.add('3,-1') }.to raise_error(ArgumentError)
+    expect { calc.add('-3,3,-1') }.to raise_error(ArgumentError)
   end
 
+  it 'returns error message with invlaid negative numbers' do 
+    expect { calc.add('-5,3,2,-1,-6') }.to raise_error(ArgumentError, "Stop being so negative. Negative numbers were passed: -5, -1, -6.")
+  end
   it 'skips numbers greater than 1000' do
     expect(calc.add('1000,3')).to eq(1003)
     expect(calc.add('3,1001')).to eq(3)
