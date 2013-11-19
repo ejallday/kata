@@ -16,7 +16,7 @@ class StringCalculator
   def validate(value)
     if negative?(value)
       raise ArgumentError, "Stop being so negative. Negative numbers were passed: #{collect_negatives(value)}."
-    elsif multiple_delimeters?(value)
+    elsif multiple_delimiters?(value)
       raise ArgumentError, 'Multiple default delimiters not allowed together'
     end
   end
@@ -25,7 +25,7 @@ class StringCalculator
     true if value.match(/\-\d/) 
   end
 
-  def multiple_delimeters?(value)
+  def multiple_delimiters?(value)
     true if value.match(/[,\n]{2,}/)
   end
 
