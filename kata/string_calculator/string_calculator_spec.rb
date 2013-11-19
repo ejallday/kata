@@ -2,7 +2,7 @@ require_relative 'string_calculator'
 require 'rspec'
 
 describe StringCalculator do 
-  let(:calc) { StringCalculator }
+  let(:calc) { StringCalculator.new }
 
   it 'returns 0 (Fixnum) when passed an empty string' do
     calc.add('').should eq(0)
