@@ -18,7 +18,6 @@ class StringCalculator
 
   private
 
-  
   def validate
     if negative?
       raise ArgumentError, "Stop being so negative. Negative numbers were passed: #{collect_negatives}."
