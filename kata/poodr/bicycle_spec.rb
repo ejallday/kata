@@ -10,13 +10,13 @@ describe Gear do
 
   it 'returns the gear ratio 1.1111111111111112 when passed (30, 27)' do 
     bike = Gear.new({chainring: 30, cog: 27})
-    expect(bike.ratio).to eq(1.1111111111111112)
+    expect(bike.ratio).to be_within(0.1).of(1.11)
   end
 
   it 'calculates gear inches' do
     wheel = Wheel.new({ rim: 26, tire: 1.5 })
     bike = Gear.new({chainring: 52, cog: 11, wheel:  wheel })
-    expect(bike.gear_inches).to eq(137.0909090909091)
+    expect(bike.gear_inches).to be_within(0.1).of(137.09)
   end
 end
 
