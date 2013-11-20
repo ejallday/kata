@@ -7,7 +7,7 @@ class StringCalculator
   end
   
   def add
-    prepare_value_array.inject(0) do |memo, num|
+    value_array.inject(0) do |memo, num|
       if num.to_i <= 1000
         memo + num.to_i
       else
@@ -20,7 +20,7 @@ class StringCalculator
 
   def validate
     if negative?
-      raise ArgumentError, "Stop being so negative. Negative numbers were passed: #{collect_negatives}."
+      raise ArgumentError, "Stop being so negative. Negative numbers were passed: #{negatives}."
     elsif multiple_delimiters?
       raise ArgumentError, 'Multiple default delimiters not allowed together'
     end
@@ -34,11 +34,11 @@ class StringCalculator
     true if value.match(/[,\n]{2,}/)
   end
 
-  def collect_negatives
-    prepare_value_array.select { |num| num.to_i < 0 }.join(', ') 
+  def negatives
+    value_array.select { |num| num.to_i < 0 }.join(', ') 
   end
 
-  def prepare_value_array
+  def value_array
     value.split(delimiter)
   end
 
