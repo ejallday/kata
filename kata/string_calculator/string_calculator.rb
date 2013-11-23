@@ -1,4 +1,6 @@
 class StringCalculator
+  MAX_NUMBER = 1000
+
   attr_reader :value
   
   def initialize(value)
@@ -7,27 +9,17 @@ class StringCalculator
   end
   
   def add
-    value_array.inject(0) do |memo, num|
-      if num.to_i <= 1000
-        memo + num.to_i
-      else
-        memo
-      end
-    end
+    digits.inject(0, :+)
   end
 
   private
 
   def validate
-    if negative?
-      raise ArgumentError, "Stop being so negative. Negative numbers were passed: #{negatives}."
+    if negatives.any?
+      raise ArgumentError, "Stop being so negative. Negative numbers were passed: #{negatives.join(', ')}."
     elsif multiple_delimiters?
       raise ArgumentError, 'Multiple default delimiters not allowed together'
     end
-  end
-
-  def negative?
-    true if value.match(/\-\d/) 
   end
 
   def multiple_delimiters?
@@ -35,11 +27,11 @@ class StringCalculator
   end
 
   def negatives
-    value_array.select { |num| num.to_i < 0 }.join(', ') 
+    digits.select { |num| num < 0 }
   end
 
-  def value_array
-    value.split(delimiter)
+  def digits
+    string_numbers.map(&:to_i).select {|num| less_than_max?(num) }
   end
 
   def delimiter
@@ -48,5 +40,13 @@ class StringCalculator
     else
       /,|\n/
     end
+  end
+
+  def less_than_max?(num)
+    num <= MAX_NUMBER
+  end
+
+  def string_numbers
+    value.split(delimiter)
   end
 end
